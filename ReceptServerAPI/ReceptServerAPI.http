@@ -1,0 +1,8 @@
+@ReceptServerAPI_HostAddress = https://localhost:7083
+
+
+GET {{ReceptServerAPI_HostAddress}}/api/Lægehus
+Accept: application/json
+
+
+###
