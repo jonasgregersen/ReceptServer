@@ -7,6 +7,7 @@ public class LægehusMapper
 {
     public static DALLægehus Map(DTOLægehus lægehus)
     {
+        if (lægehus == null) return null!;
         return new DALLægehus
         {
             Id = lægehus.Id,
@@ -16,6 +17,7 @@ public class LægehusMapper
     }
     public static DTOLægehus Map(DALLægehus lægehus)
     {
+        if (lægehus == null) return null!;
         return new DTOLægehus
         {
             Id = lægehus.Id,

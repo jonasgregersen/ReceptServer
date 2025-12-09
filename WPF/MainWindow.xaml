@@ -1,0 +1,112 @@
+﻿<Window x:Class="WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        xmlns:viewmodels="clr-namespace:WPF.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ReceptViewModel}"
+        mc:Ignorable="d"
+        Title="{Binding LægehusNavn, UpdateSourceTrigger=PropertyChanged}" Height="600" Width="900">
+
+    <Grid Margin="20">
+        <TabControl>
+            <!-- Opret Recept Tab -->
+            <TabItem Header="Opret Recept">
+                <StackPanel Margin="10" VerticalAlignment="Top">
+                    <!-- Recept info -->
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Text="CPR-nummer:"/>
+                            <TextBox x:Name="CprTextBox" Width="150" Text="{Binding Recept.CprNummer, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Ydernummer (lægehus):"/>
+                            <TextBox Width="150" Text="{Binding Recept.YderNummer}" IsReadOnly="True"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Ordinationer -->
+                    <DataGrid ItemsSource="{Binding Recept.Ordinationer}" AutoGenerateColumns="False" CanUserAddRows="False" Height="300">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Lægemiddel" Binding="{Binding Lægemiddel}" Width="*"/>
+                            <DataGridTextColumn Header="Dosis" Binding="{Binding Dosis}" Width="150"/>
+                            <DataGridTextColumn Header="Antal Udleveringer" Binding="{Binding Udleveringer}" Width="150"/>
+                            <DataGridTextColumn Header="Foretagne Udleveringer" Binding="{Binding FortagneUdleveringer}" Width="150"/>
+                            <DataGridCheckBoxColumn Header="Lukket" Binding="{Binding Lukket}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <!-- Knapper -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Tilføj Ordination" Width="150" Click="TilfoejOrdination_Click"/>
+                        <Button Content="Gem Recept" Width="120" Click="GemRecept_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Se Recepter Tab -->
+            <TabItem Header="Se Recepter">
+                <StackPanel Margin="10">
+                    <TextBlock Text="Eksisterende recepter" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+
+                    <DataGrid ItemsSource="{Binding LægehusRecepter}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  Height="400">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80"/>
+                            <DataGridTextColumn Header="CPR" Binding="{Binding CprNummer}" Width="150"/>
+                            <DataGridTextColumn Header="Ydernummer" Binding="{Binding YderNummer}" Width="150"/>
+                            <DataGridTextColumn Header="Antal Ordinationer" Binding="{Binding Ordinationer.Count}" Width="150"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Søg Recept">
+                <Grid Margin="10" x:Name="SearchGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Søgning -->
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Recept ID:" VerticalAlignment="Center"/>
+                        <TextBox Width="120" x:Name="ReceptIdTextBox"/>
+                        <Button Content="Søg" Click="SøgRecept_Click"/>
+                    </StackPanel>
+
+                    <!-- Recept info -->
+                    <StackPanel Grid.Row="1" Margin="0 15 0 15">
+                        <TextBlock Text="CPR:" FontWeight="Bold"/>
+                        <TextBlock x:Name="CprText"/>
+
+                        <TextBlock Margin="0 10 0 0" Text="Ydernummer:" FontWeight="Bold"/>
+                        <TextBlock x:Name="YderNummerText"/>
+                    </StackPanel>
+
+                    <!-- Ordinationer -->
+                    <DataGrid Grid.Row="2"
+                  x:Name="OrdinationerGrid"
+                  AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Lægemiddel" Binding="{Binding Lægemiddel}" Width="*"/>
+                            <DataGridTextColumn Header="Dosis" Binding="{Binding Dosis}" Width="150"/>
+                            <DataGridTextColumn Header="Antal Udleveringer" Binding="{Binding Udleveringer}" Width="150"/>
+                            <DataGridTextColumn Header="Foretagne Udleveringer" Binding="{Binding FortagneUdleveringer}" Width="150"/>
+                            <DataGridCheckBoxColumn Header="Lukket" Binding="{Binding Lukket}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+
+        </TabControl>
+    </Grid>
+</Window>

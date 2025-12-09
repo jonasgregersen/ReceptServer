@@ -20,11 +20,20 @@ public class LægehusController : ControllerBase
     {
         return Ok(_lægehusService.GetAll());
     }
-    [HttpGet("{id}")]
-    public ActionResult<Lægehus> GetById(int id)
+    [HttpGet("{yderNummer}")]
+    public async Task<ActionResult<Lægehus>> GetByYdernummer(string yderNummer)
     {
-        return Ok(_lægehusService.GetById(id));
+
+         var lægehus = await _lægehusService.GetByYdernummer(yderNummer);
+
+            if (lægehus == null)
+            {
+                return NotFound();
+            }
+            return Ok(lægehus);
+        
     }
+    
     [HttpPost]
     public IActionResult Create([FromBody] Lægehus lægehus)
     {

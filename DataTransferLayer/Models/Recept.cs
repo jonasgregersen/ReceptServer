@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace DataTransferLayer.Models;
 
 public class Recept
@@ -7,4 +9,5 @@ public class Recept
     public string CprNummer { get; set; }
     public DateTime OprettelsesDato { get; set; }
     public int LægehusId { get; set; }
+    public ObservableCollection<Ordination> Ordinationer { get; set; }
 }

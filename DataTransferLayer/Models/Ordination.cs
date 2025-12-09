@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace DataTransferLayer.Models;
 
 public class Ordination
@@ -8,6 +10,5 @@ public class Ordination
     public int Udleveringer { get; set; }
     public int FortagneUdleveringer { get; set; }
     public bool Lukket { get; set; }
-    public Recept Recept { get; set; }
     public int ReceptId { get; set; }
 }

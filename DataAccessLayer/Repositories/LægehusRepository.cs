@@ -1,5 +1,6 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
@@ -20,6 +21,11 @@ public class LægehusRepository
     public Lægehus GetById(int id)
     {
         return _context.Lægehus.Find(id);
+    }
+
+    public Lægehus GetByYdernummer(string ydernummer)
+    {
+        return _context.Lægehus.FirstOrDefault(l => l.YderNummer.Equals(ydernummer));
     }
     
     public void Add(Lægehus lægehus)

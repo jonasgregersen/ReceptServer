@@ -1,5 +1,6 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
@@ -14,18 +15,31 @@ public class ReceptRepository
     
     public List<Recept> GetByCpr(string cprNummer)
     {
-        return _context.Recepter.Where(r => r.CprNummer == cprNummer).ToList();
+        return _context.Recepter
+            .Include(r => r.Ordinationer)
+            .Where(r => r.CprNummer == cprNummer).ToList();
     }
     public List<Recept> GetAll()
     {
-        return _context.Recepter.ToList();
+        return _context.Recepter
+            .Include(r => r.Ordinationer)
+            .ToList();
     }
-    
-    public Recept GetById(int id)
+
+    public List<Recept> GetByLægehusId(int id)
     {
-        return _context.Recepter.Find(id);
+        return _context.Recepter
+            .Include(r => r.Ordinationer)
+            .Where(r => r.LægehusId == id)
+            .ToList();
     }
-    
+
+    public Recept? GetById(int id)
+    {
+        return _context.Recepter
+            .Include(r => r.Ordinationer)
+            .FirstOrDefault(r => r.Id == id);
+    }
     public void Add(Recept recept)
     {
         _context.Recepter.Add(recept);

@@ -17,15 +17,23 @@ public class ReceptService
     {
         return _receptRepository.GetByCpr(cprNummer).Select(recept => ReceptMapper.Map(recept)).ToList();
     }
+    public DTORecept GetById(int id)
+    {
+        var recept = _receptRepository.GetById(id);
+        if (recept == null)
+        {
+            return null;
+        }
+        return ReceptMapper.Map(recept);
+    }
     public List<DTORecept> GetAll()
     {
         return _receptRepository.GetAll().Select(recept => ReceptMapper.Map(recept)).ToList();
     }
-    
-    public DTORecept GetById(int id)
+    public List<DTORecept> GetLægehusRecepter(int id)
     {
-        var DALrecept = _receptRepository.GetById(id);
-        return ReceptMapper.Map(DALrecept);
+        var DALRecepter = _receptRepository.GetByLægehusId(id);
+        return DALRecepter.Select(r => ReceptMapper.Map(r)).ToList();
     }
     
     public void Add(DTORecept recept)

@@ -1,5 +1,6 @@
 using DataAccessLayer.Mappers;
 using DataAccessLayer.Repositories;
+using DataTransferLayer.Models;
 using DTOLægehus = DataTransferLayer.Models.Lægehus;
 
 namespace Business.Models;
@@ -23,7 +24,17 @@ public class LægehusService
         var DALLægehus = _lægehusRepository.GetById(id);
         return LægehusMapper.Map(DALLægehus);
     }
-    
+
+    public async Task<DTOLægehus> GetByYdernummer(string ydernummer)
+    {
+        var DALLægehus = _lægehusRepository.GetByYdernummer(ydernummer);
+        if (DALLægehus == null)
+        {
+            return null!;
+        }
+        return LægehusMapper.Map(DALLægehus);
+    }
+
     public void Add(DTOLægehus lægehus)
     {
         var DALlægehus = LægehusMapper.Map(lægehus);
