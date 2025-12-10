@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DTOLægehus = DataTransferLayer.Models.Lægehus;
+using WPF.Models;
 
 namespace WPF.Services
 {
@@ -13,11 +13,11 @@ namespace WPF.Services
         public static AppState Instance => _instance ??= new AppState();
 
         // Den lægehus du er logget ind som
-        public DTOLægehus? CurrentLægehus { get; private set; }
+        public Lægehus? CurrentLægehus { get; private set; }
 
         private AppState() { }
 
-        public void SetLægehus(DTOLægehus lægehus)
+        public void SetLægehus(Lægehus lægehus)
         {
             CurrentLægehus = lægehus;
         }

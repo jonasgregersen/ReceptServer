@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using WPF.Views;
 
@@ -11,10 +6,10 @@ namespace WPF.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private readonly WPF.Services.ApiService _apiService;
+        private readonly Services.ApiService _apiService;
         public LoginViewModel()
         {
-            _apiService = new WPF.Services.ApiService();
+            _apiService = new Services.ApiService();
         }
 
         private string _ydernummer;
@@ -38,7 +33,7 @@ namespace WPF.ViewModels
             
             Services.AppState.Instance.SetLægehus(lægehus);
 
-            var main = new WPF.MainWindow();
+            var main = new MainWindow();
             main.Show();
 
             Application.Current.Windows
@@ -53,7 +48,7 @@ namespace WPF.ViewModels
             {
                 Services.AppState.Instance.SetLægehus(null!);
 
-                var login = new Views.LaegehusLoginWindow();
+                var login = new LaegehusLoginWindow();
                 login.Show();
 
                 Application.Current.Windows

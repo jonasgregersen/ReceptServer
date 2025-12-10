@@ -45,6 +45,11 @@ namespace ReceptServer.Controllers
             }
             HttpContext.Session.SetString("CprNummer", query);
             var recept = _receptBLL.GetByCpr(query);
+            if (recept.Count == 0)
+            {
+                TempData["Error"] = "Ingen recepter fundet på CPR nummer.";
+                return View("SearchRecept");
+            }
             return View("SearchReceptResult", recept);
         }
         [HttpPost]

@@ -1,4 +1,4 @@
-﻿using DataTransferLayer.Models;
+﻿using WPF.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
@@ -60,10 +60,17 @@ namespace WPF.Services
         public async Task<bool> OpretRecept(Recept recept)
         {
             if (recept == null) return false;
-
+            var receptAPI = new 
+            {
+                YderNummer = recept.YderNummer,
+                CprNummer = recept.CprNummer,
+                OprettelsesDato = recept.OprettelsesDato,
+                LægehusId = recept.LægehusId,
+                Ordinationer = recept.Ordinationer.ToList()
+            };
             try
             {
-                var response = await client.PostAsJsonAsync("api/Recept", recept);
+                var response = await client.PostAsJsonAsync("api/Recept", receptAPI);
 
                 if (response.IsSuccessStatusCode)
                 {

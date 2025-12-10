@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using WPF.ViewModels;
+using WPF.Models;
 using WPF.Services;
 using Microsoft.IdentityModel.Tokens;
 
@@ -29,9 +30,33 @@ namespace WPF
 
         private void GemRecept_Click(object sender, RoutedEventArgs e)
         {
+            if (HarValidationFejl())
+            {
+                MessageBox.Show("Der er valideringsfejl i ordinationerne.\nRet dem før recepten kan gemmes.",
+                        "Valideringsfejl",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                return;
+            }
             var cprNummer = CprTextBox.Text.Trim();
             _receptViewModel.GemRecept(cprNummer);
         }
+        private bool HarValidationFejl()
+        {
+            foreach (var o in _receptViewModel.Recept.Ordinationer)
+            {
+                if (!string.IsNullOrEmpty(o[nameof(o.Lægemiddel)]) ||
+                    !string.IsNullOrEmpty(o[nameof(o.Dosis)]) ||
+                    !string.IsNullOrEmpty(o[nameof(o.Udleveringer)]) ||
+                    !string.IsNullOrEmpty(o[nameof(o.FortagneUdleveringer)]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private async void SøgRecept_Click(object sender, RoutedEventArgs e)
         {
             if (int.TryParse(ReceptIdTextBox.Text.Trim(), out int receptId))

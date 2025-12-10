@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using DataTransferLayer.Models;
+﻿using System.ComponentModel;
+using WPF.Models;
 using System.Windows;
 using WPF.Services;
 using System.Collections.ObjectModel;
@@ -15,8 +9,8 @@ namespace WPF.ViewModels
 {
     public class ReceptViewModel: INotifyPropertyChanged
     {
-        private ApiService _apiService;
-        private AppState _appState = AppState.Instance;
+        private readonly ApiService _apiService;
+        private readonly AppState _appState = AppState.Instance;
         private Recept _recept;
         private Recept _fundetRecept;
         private string _lægehusNavn;

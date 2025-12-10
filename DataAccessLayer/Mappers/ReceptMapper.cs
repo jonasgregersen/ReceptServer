@@ -27,10 +27,7 @@ public class ReceptMapper
             CprNummer = recept.CprNummer,
             OprettelsesDato = recept.OprettelsesDato,
             LægehusId = recept.LægehusId,
-            Ordinationer = new ObservableCollection<DTOOrdination>
-            (
-                recept.Ordinationer.Select(OrdinationMapper.Map)
-            )
+            Ordinationer = recept.Ordinationer.Select(OrdinationMapper.Map).ToList()
         };
     }
 }

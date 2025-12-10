@@ -5,4 +5,10 @@
         <input type="text" name="query" required />
         <button type="submit">Søg</button>
     }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
 </div>

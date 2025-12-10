@@ -43,6 +43,7 @@ public class ReceptController: ControllerBase
     [HttpPost]
     public IActionResult CreateRecept([FromBody] DTORecept receipt)
     {
+        
         _receptService.Add(receipt);
         return Ok();
     }
