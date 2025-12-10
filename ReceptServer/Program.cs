@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Context;
+using Business.Models;
+using DataAccessLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,8 +9,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseSqlServer("Server=localhost,1433;Database=ReceptServer;User Id=sa;Password=reallyStrongPwd123;");
+    options.UseSqlServer("Server=localhost,1433;Database=ReceptServer;User Id=sa;Password=reallyStrongPwd123;TrustServerCertificate=True");
 });
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddScoped<ApotekService>();
+builder.Services.AddScoped<ReceptService>();
+builder.Services.AddScoped<ReceptUdleveringService>();
+
+builder.Services.AddScoped<ApotekRepository>();
+builder.Services.AddScoped<ReceptRepository>();
+builder.Services.AddScoped<ReceptUdleveringRepository>();
+builder.Services.AddScoped<OrdinationRepository>();
+
 
 var app = builder.Build();
 
@@ -20,16 +40,19 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseSession();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Apotek}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 

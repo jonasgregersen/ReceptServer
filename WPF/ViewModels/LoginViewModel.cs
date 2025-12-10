@@ -46,6 +46,22 @@ namespace WPF.ViewModels
                 .First()
                 .Close();                             
         }
+
+        public async Task LogOut()
+        {
+            if (Services.AppState.Instance.CurrentLægehus != null)
+            {
+                Services.AppState.Instance.SetLægehus(null!);
+
+                var login = new Views.LaegehusLoginWindow();
+                login.Show();
+
+                Application.Current.Windows
+                    .OfType<MainWindow>()
+                    .First()
+                    .Close();
+            }
+        }
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 

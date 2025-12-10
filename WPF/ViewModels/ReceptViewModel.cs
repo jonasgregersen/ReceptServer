@@ -117,12 +117,12 @@ namespace WPF.ViewModels
             }
         }
 
-        public async Task SøgRecept(int id)
+        public async Task<bool> SøgRecept(int id)
         {
             if (id <= 0)
             {
                 MessageBox.Show("Indtast et gyldigt recept ID.");
-                return;
+                return false;
             }
             try
             {
@@ -130,12 +130,15 @@ namespace WPF.ViewModels
                 if (FundetRecept == null)
                 {
                     MessageBox.Show("Ingen recept fundet med dette ID.");
+                    return false;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Fejl ved søgning af recept: " + ex.Message, "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
             }
+            return true;
         }
 
         public void InitRecept()

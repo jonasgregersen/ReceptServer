@@ -26,7 +26,7 @@ public class ReceptRepository
             .ToList();
     }
 
-    public List<Recept> GetByLægehusId(int id)
+    public List<Recept> GetByLaegehusId(int id)
     {
         return _context.Recepter
             .Include(r => r.Ordinationer)
@@ -46,9 +46,8 @@ public class ReceptRepository
         _context.SaveChanges();
     }
 
-    public void Update(int id, Recept recept)
+    public void Update(Recept recept)
     {
-        _context.Recepter.Find(id);
         if (recept != null)
         {
             _context.Recepter.Update(recept);

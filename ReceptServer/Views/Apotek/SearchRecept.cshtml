@@ -1,0 +1,8 @@
+﻿<div class="search-container">
+    @using (Html.BeginForm("Search", "Apotek", FormMethod.Get))
+    {
+        @Html.Label("Søg efter recept på CPR nummer:")
+        <input type="text" name="query" required />
+        <button type="submit">Søg</button>
+    }
+</div>

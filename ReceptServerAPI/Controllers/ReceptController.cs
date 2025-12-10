@@ -48,9 +48,9 @@ public class ReceptController: ControllerBase
     }
     
     [HttpPut]
-    public IActionResult Update(int id, [FromBody] DTORecept receipt)
+    public IActionResult Update([FromBody] DTORecept receipt)
     {
-        _receptService.Update(id, receipt);
+        _receptService.Update(receipt);
         return Ok();
     }
     

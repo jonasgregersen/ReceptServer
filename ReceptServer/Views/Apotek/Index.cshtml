@@ -1,0 +1,25 @@
+﻿@model List<DataTransferLayer.Models.Apotek>
+
+@{
+    ViewData["Title"] = "Apotek Recept System";
+}
+
+<div class="apotek-container">
+@if (Model.Count() == 0) {
+    <p><strong>Ingen apoteker fundet.</strong></p>
+} else {
+    @foreach(var apotek in Model)
+    {
+        <div class="apotek-card">
+                <a 
+                asp-action="Index" 
+                asp-controller="Apotek" 
+                asp-route-id="@apotek.Id">
+                @apotek.Navn
+                </a>
+            <p><strong>Adresse:</strong> @apotek.Adresse</p>
+        </div>    
+    }
+}
+</div>
+

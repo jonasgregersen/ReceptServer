@@ -32,7 +32,7 @@ public class ReceptService
     }
     public List<DTORecept> GetLægehusRecepter(int id)
     {
-        var DALRecepter = _receptRepository.GetByLægehusId(id);
+        var DALRecepter = _receptRepository.GetByLaegehusId(id);
         return DALRecepter.Select(r => ReceptMapper.Map(r)).ToList();
     }
     
@@ -42,10 +42,10 @@ public class ReceptService
         _receptRepository.Add(DALrecept);
     }
     
-    public void Update(int id, DTORecept recept)
+    public void Update(DTORecept recept)
     {
         var DALrecept = ReceptMapper.Map(recept);
-        _receptRepository.Update(id, DALrecept);
+        _receptRepository.Update(DALrecept);
     }
     
     public void Delete(int id)

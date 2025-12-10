@@ -9,7 +9,25 @@
         Title="{Binding LægehusNavn, UpdateSourceTrigger=PropertyChanged}" Height="600" Width="900">
 
     <Grid Margin="20">
-        <TabControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="311*"/>
+            <ColumnDefinition Width="119*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Top-menu med log ud -->
+        <!-- Topbar med log ud -->
+        <StackPanel Orientation="Horizontal"
+                DockPanel.Dock="Top"
+                HorizontalAlignment="Right"
+                Margin="0,0,-200,507" RenderTransformOrigin="0.508,0.514">
+            <Button Content="Log ud"
+        Padding="20 10"
+        FontSize="14"
+        Width="120"
+        Height="40"
+        Panel.ZIndex="5"
+        Click="LogOut_Click"/>
+        </StackPanel>
+        <TabControl Margin="0,50,0,0" Grid.ColumnSpan="2">
             <!-- Opret Recept Tab -->
             <TabItem Header="Opret Recept">
                 <StackPanel Margin="10" VerticalAlignment="Top">

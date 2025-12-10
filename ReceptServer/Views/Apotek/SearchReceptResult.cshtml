@@ -1,0 +1,54 @@
+﻿@model List<DataTransferLayer.Models.Recept>
+
+    @foreach(var recept in Model) {
+        <div class=$"recept{@recept.Id}">
+            <h2>Recept ID: @recept.Id</h2>
+
+        <p><strong>Ydernummer:</strong> @recept.YderNummer</p>
+        <p><strong>CPR:</strong> @recept.CprNummer</p>
+        <p><strong>Oprettet:</strong> @recept.OprettelsesDato.ToString("dd-MM-yyyy")</p>
+        <p><strong>Lægehus ID:</strong> @recept.LægehusId</p>
+
+            <h3>Ordinationer</h3>
+
+        @if (recept.Ordinationer != null && recept.Ordinationer.Count > 0)
+            {
+                <ul>
+                @foreach (var ord in recept.Ordinationer)
+                    {
+                        @Html.BeginForm("UdleverOrdination", "Apotek", FormMethod.Post) {
+                            <li class="ordination">
+                                <strong>@ord.Lægemiddel</strong><br />
+                                Dosis: @ord.Dosis<br />
+                                Udleveringer: @ord.FortagneUdleveringer / @ord.Udleveringer 
+                                <input type="number" name="antal"/>
+                                @if (ord.Lukket)
+                                {
+                                    <button type="submit" disabled>Udlevér ordination</button>
+                                } else
+                                {
+                                    <button type="submit">Udlevér ordination</button>
+                                }
+                            @if (TempData["Error"] != null)
+                                {
+                                    <div class="alert alert-danger">
+                                        @TempData["Error"]
+                                    </div>
+                                }
+                                <br />
+                                <input type="hidden" value="@recept.Id" name="receptId"/>
+                                <input type="hidden" value="@ord.Id" name="ordinationId" />
+                                Lukket: @(ord.Lukket ? "Ja" : "Nej")
+                            
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Ingen ordinationer.</p>
+            }
+        </div>
+}
+
