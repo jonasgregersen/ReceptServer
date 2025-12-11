@@ -13,8 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj" />
-    <ProjectReference Include="..\DataTransferLayer\DataTransferLayer.csproj" />
+    <ProjectReference Include="..\ReceptServerAPI\ReceptServerAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

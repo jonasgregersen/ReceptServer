@@ -9,5 +9,6 @@ public class Recept
     public string CprNummer { get; set; }
     public DateTime OprettelsesDato { get; set; }
     public int LægehusId { get; set; }
+    public bool Lukket { get; set; }
     public List<Ordination> Ordinationer { get; set; }
 }

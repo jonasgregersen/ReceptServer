@@ -16,9 +16,9 @@ public class LægehusController : ControllerBase
     }
     
     [HttpGet]
-    public ActionResult<List<Lægehus>> GetAll()
+    public async Task<ActionResult<List<Lægehus>>> GetAll()
     {
-        return Ok(_lægehusService.GetAll());
+        return Ok(await _lægehusService.GetAll());
     }
     [HttpGet("{yderNummer}")]
     public async Task<ActionResult<Lægehus>> GetByYdernummer(string yderNummer)
@@ -35,21 +35,15 @@ public class LægehusController : ControllerBase
     }
     
     [HttpPost]
-    public IActionResult Create([FromBody] Lægehus lægehus)
+    public async Task<IActionResult> Create([FromBody] Lægehus lægehus)
     {
-        _lægehusService.Add(lægehus);
+        await _lægehusService.Add(lægehus);
         return Ok();
     }
     [HttpPut]
-    public IActionResult Update([FromBody] Lægehus lægehus)
+    public async Task<IActionResult> Update([FromBody] Lægehus lægehus)
     {
-        _lægehusService.Update(lægehus);
-        return Ok();
-    }
-    [HttpDelete]
-    public IActionResult Delete(int id)
-    {
-        _lægehusService.Delete(id);
+        await _lægehusService.Update(lægehus);
         return Ok();
     }
 }

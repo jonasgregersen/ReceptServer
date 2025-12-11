@@ -13,40 +13,40 @@ public class LægehusRepository
         _context = context;
     }
     
-    public List<Lægehus> GetAll()
+    public async Task<List<Lægehus>> GetAll()
     {
-        return _context.Lægehus.ToList();
+        return await _context.Lægehus.ToListAsync();
     }
     
-    public Lægehus GetById(int id)
+    public async Task<Lægehus> GetById(int id)
     {
-        return _context.Lægehus.Find(id);
+        return await _context.Lægehus.FindAsync(id);
     }
 
-    public Lægehus GetByYdernummer(string ydernummer)
+    public async Task<Lægehus> GetByYdernummer(string ydernummer)
     {
-        return _context.Lægehus.FirstOrDefault(l => l.YderNummer.Equals(ydernummer));
+        return await _context.Lægehus.FirstOrDefaultAsync(l => l.YderNummer.Equals(ydernummer));
     }
     
-    public void Add(Lægehus lægehus)
+    public async Task Add(Lægehus lægehus)
     {
-        _context.Lægehus.Add(lægehus);
-        _context.SaveChanges();
+        await _context.Lægehus.AddAsync(lægehus);
+        await _context.SaveChangesAsync();
     }
     
-    public void Update(Lægehus lægehus)
+    public async Task Update(Lægehus lægehus)
     {
         _context.Lægehus.Update(lægehus);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
     
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var lægehus = _context.Lægehus.Find(id);
+        var lægehus = await _context.Lægehus.FindAsync(id);
         if (lægehus != null)
         {
             _context.Lægehus.Remove(lægehus);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

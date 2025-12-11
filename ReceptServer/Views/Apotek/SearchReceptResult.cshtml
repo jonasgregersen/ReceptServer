@@ -1,8 +1,17 @@
 ﻿@model List<DataTransferLayer.Models.Recept>
 
+    <a href="/">Gå tilbage</a>
 <div class="recept-container">
+    @if (!Model.Any<DataTransferLayer.Models.Recept>(r => !r.Lukket))
+    {
+        <p><strong>Der er ingen aktive recepter på CPR nummer.</strong></p> <a href="/">Gå tilbage</a>
+    }
     @foreach (var recept in Model)
     {
+        if (recept.Lukket)
+        {
+            continue;
+        }
         <div class="recept-card">
             <div class="recept-header">
                 <h2>Recept ID: @recept.Id</h2>
@@ -12,7 +21,6 @@
             <div class="recept-info">
                 <p><strong>Ydernummer:</strong> @recept.YderNummer</p>
                 <p><strong>CPR:</strong> @recept.CprNummer</p>
-                <p><strong>Lægehus ID:</strong> @recept.LægehusId</p>
             </div>
 
             <h3>Ordinationer</h3>
@@ -21,6 +29,7 @@
                 <div class="ordination-list">
                     @foreach (var ord in recept.Ordinationer)
                     {
+
                         <div class="ordination-card">
                             @using (Html.BeginForm("UdleverOrdination", "Apotek", FormMethod.Post))
                             {
@@ -28,14 +37,13 @@
                                     <p><strong>Lægemiddel:</strong> @ord.Lægemiddel</p>
                                     <p><strong>Dosis:</strong> @ord.Dosis</p>
                                     <p><strong>Udleveringer:</strong> @ord.FortagneUdleveringer / @ord.Udleveringer</p>
-                                    <p><strong>Lukket:</strong> @(ord.Lukket ? "Ja" : "Nej")</p>
                                 </div>
 
                                 <div class="ordination-actions">
-                                    <input type="number" name="antal" placeholder="Antal" min="1" />
+                                    <input type="number" name="antal" placeholder="Antal" min="1" @(ord.FortagneUdleveringer == ord.Udleveringer ? "disabled" : "") />
                                     <input type="hidden" name="receptId" value="@recept.Id" />
                                     <input type="hidden" name="ordinationId" value="@ord.Id" />
-                                    <button type="submit" @(ord.Lukket ? "disabled" : "")>Udlevér</button>
+                                    <button type="submit" @(ord.FortagneUdleveringer == ord.Udleveringer ? "disabled" : "")>Udlevér</button>
                                 </div>
                             }
 

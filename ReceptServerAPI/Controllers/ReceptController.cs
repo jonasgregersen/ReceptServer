@@ -16,16 +16,16 @@ public class ReceptController: ControllerBase
     }
     
     [HttpGet("cpr/{cprNummer}")]
-    public ActionResult<List<DTORecept>> GetReceptByCpr(string cprNummer)
+    public async Task<ActionResult<List<DTORecept>>> GetReceptByCpr(string cprNummer)
     {
-        var result = _receptService.GetByCpr(cprNummer);
-        return Ok(_receptService.GetAll());
+        var result = await _receptService.GetByCpr(cprNummer);
+        return Ok(result);
     }
 
     [HttpGet("id/{id}")]
-    public ActionResult<DTORecept> GetReceptById(int id)
+    public async Task<ActionResult<DTORecept>> GetReceptById(int id)
     {
-        var result = _receptService.GetById(id);
+        var result = await _receptService.GetById(id);
         if (result == null)
         {
             return NotFound();
@@ -34,32 +34,23 @@ public class ReceptController: ControllerBase
     }
 
     [HttpGet("lægehus/{lægehusId}")] 
-    public ActionResult<List<DTORecept>> GetReceptByLægehus(int lægehusId)
+    public async Task<ActionResult<List<DTORecept>>> GetReceptByLægehus(int lægehusId)
     {
-        var result = _receptService.GetLægehusRecepter(lægehusId);
+        var result = await _receptService.GetLægehusRecepter(lægehusId);
         return Ok(result);      
     }
     
     [HttpPost]
-    public IActionResult CreateRecept([FromBody] DTORecept receipt)
+    public async Task<IActionResult> CreateRecept([FromBody] DTORecept recept)
     {
-        
-        _receptService.Add(receipt);
+        await _receptService.Add(recept);
         return Ok();
     }
     
     [HttpPut]
-    public IActionResult Update([FromBody] DTORecept receipt)
+    public async Task<IActionResult> Update([FromBody] DTORecept recept)
     {
-        _receptService.Update(receipt);
+        await _receptService.Update(recept);
         return Ok();
-    }
-    
-    [HttpDelete]
-    public IActionResult Delete(int id)
-    {
-        _receptService.Delete(id);
-        return Ok();
-    }
-    
+    }   
 }

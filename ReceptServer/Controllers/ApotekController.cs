@@ -1,6 +1,7 @@
 ﻿using Business.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 using Recept = DataTransferLayer.Models.Recept;
 
@@ -17,23 +18,23 @@ namespace ReceptServer.Controllers
             _receptBLL = receptBLL;
         }
         // GET: ApotekController
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var apoteker = _apotekBLL.GetAll();
+            var apoteker = await _apotekBLL.GetAll();
             return View(apoteker);
         }
 
         [Route("apotek/{id:int}")]
-        public ActionResult Index(int id)
+        public async Task<ActionResult> Index(int id)
         {
-            var apotek = _apotekBLL.GetById(id);
+            var apotek = await _apotekBLL.GetById(id);
             HttpContext.Session.SetInt32("ApotekId", id);
             return View("ApotekDetail", apotek);
 
         }
         [HttpGet]
         [Route("apotek/SearchRecept")]
-        public ActionResult Search(string query)
+        public async Task<ActionResult> Search(string query)
         {
             if (!ValidateApotek())
             {
@@ -44,13 +45,13 @@ namespace ReceptServer.Controllers
                 return View("SearchRecept");
             }
             HttpContext.Session.SetString("CprNummer", query);
-            var recept = _receptBLL.GetByCpr(query);
-            if (recept.Count == 0)
+            var cprRecepter = await _receptBLL.GetByCpr(query);
+            if (!await CheckAktivRecepter(query))
             {
-                TempData["Error"] = "Ingen recepter fundet på CPR nummer.";
+                TempData["Error"] = "Ingen aktive recepter fundet på CPR nummer.";
                 return View("SearchRecept");
             }
-            return View("SearchReceptResult", recept);
+            return View("SearchReceptResult", cprRecepter);
         }
         [HttpPost]
         [Route("apotek/UdleverOrdination")]
@@ -65,7 +66,7 @@ namespace ReceptServer.Controllers
             if (antal <= 0)
             {
                 TempData["Error"] = "Antal skal være større end 0.";
-                return View("SearchReceptResult", _receptBLL.GetByCpr(cprNummer));
+                return View("SearchReceptResult", await _receptBLL.GetByCpr(cprNummer));
             }
             try 
             {
@@ -75,20 +76,31 @@ namespace ReceptServer.Controllers
             {
                 TempData["Error"] = ex.Message;
             }
-            return View("SearchReceptResult", _receptBLL.GetByCpr(cprNummer));
+            return View("SearchReceptResult", await _receptBLL.GetByCpr(cprNummer));
         }
+
         private bool ValidateApotek()
         {
             return HttpContext.Session.GetString("ApotekId") != null;
         }
-        // GET: ApotekController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        
-      
+
+        private async Task<bool> CheckAktivRecepter(string cpr)
+        {
+            var cprRecepter = await _receptBLL.GetByCpr(cpr);
+            if (cprRecepter.IsNullOrEmpty())
+            {
+                return false;
+            }
+            foreach(var recept in cprRecepter)
+            {
+                if (!recept.Lukket)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }      
     }
 }
 

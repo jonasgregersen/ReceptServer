@@ -15,6 +15,7 @@ public class ReceptMapper
             CprNummer = recept.CprNummer,
             OprettelsesDato = recept.OprettelsesDato,
             LægehusId = recept.LægehusId,
+            Lukket = recept.Lukket,
             Ordinationer = recept.Ordinationer.Select(OrdinationMapper.Map).ToList()
         };
     }
@@ -27,6 +28,7 @@ public class ReceptMapper
             CprNummer = recept.CprNummer,
             OprettelsesDato = recept.OprettelsesDato,
             LægehusId = recept.LægehusId,
+            Lukket = recept.Lukket,
             Ordinationer = recept.Ordinationer.Select(OrdinationMapper.Map).ToList()
         };
     }

@@ -9,6 +9,5 @@ public class Ordination
     public String Dosis { get; set; }
     public int Udleveringer { get; set; }
     public int FortagneUdleveringer { get; set; }
-    public bool Lukket { get; set; }
     public int ReceptId { get; set; }
 }

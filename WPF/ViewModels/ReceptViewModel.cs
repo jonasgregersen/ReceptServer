@@ -66,9 +66,21 @@ namespace WPF.ViewModels
         {
             var ordination = new Ordination
             {
+                Lægemiddel = "",
+                Dosis = "",
+                Udleveringer = 0,
+                FortagneUdleveringer = 0,
                 ReceptId = Recept.Id
             };
             Recept.Ordinationer.Add(ordination);
+        }
+
+        public void SletOrdination(Ordination ordination)
+        {
+            if (Recept.Ordinationer.Contains(ordination))
+            {
+                Recept.Ordinationer.Remove(ordination);
+            }
         }
 
         public async Task GemRecept(string cprNummer)

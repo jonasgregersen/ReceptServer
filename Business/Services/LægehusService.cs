@@ -14,20 +14,21 @@ public class LægehusService
         _lægehusRepository = lægehusRepository;
     }
     
-    public List<DTOLægehus> GetAll()
+    public async Task<List<DTOLægehus>> GetAll()
     {
-        return _lægehusRepository.GetAll().Select(lægehus => LægehusMapper.Map(lægehus)).ToList();
+        var lægehuse = await _lægehusRepository.GetAll();
+        return lægehuse.Select(lægehus => LægehusMapper.Map(lægehus)).ToList();
     }
     
-    public DTOLægehus GetById(int id)
+    public async Task<DTOLægehus> GetById(int id)
     {
-        var DALLægehus = _lægehusRepository.GetById(id);
+        var DALLægehus = await _lægehusRepository.GetById(id);
         return LægehusMapper.Map(DALLægehus);
     }
 
     public async Task<DTOLægehus> GetByYdernummer(string ydernummer)
     {
-        var DALLægehus = _lægehusRepository.GetByYdernummer(ydernummer);
+        var DALLægehus = await _lægehusRepository.GetByYdernummer(ydernummer);
         if (DALLægehus == null)
         {
             return null!;
@@ -35,20 +36,15 @@ public class LægehusService
         return LægehusMapper.Map(DALLægehus);
     }
 
-    public void Add(DTOLægehus lægehus)
+    public async Task Add(DTOLægehus lægehus)
     {
         var DALlægehus = LægehusMapper.Map(lægehus);
-        _lægehusRepository.Add(DALlægehus);
+        await _lægehusRepository.Add(DALlægehus);
     }
     
-    public void Update(DTOLægehus lægehus)
+    public async Task Update(DTOLægehus lægehus)
     {
         var DALlægehus = LægehusMapper.Map(lægehus);
-        _lægehusRepository.Update(DALlægehus);
-    }
-    
-    public void Delete(int id)
-    {
-        _lægehusRepository.Delete(id);
+        await _lægehusRepository.Update(DALlægehus);
     }
 }

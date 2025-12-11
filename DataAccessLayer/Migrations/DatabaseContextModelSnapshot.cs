@@ -79,9 +79,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("FortagneUdleveringer")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Lukket")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Lægemiddel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -110,6 +107,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("CprNummer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Lukket")
+                        .HasColumnType("bit");
 
                     b.Property<int>("LægehusId")
                         .HasColumnType("int");

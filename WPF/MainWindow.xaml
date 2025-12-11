@@ -47,18 +47,58 @@
                     </StackPanel>
 
                     <!-- Ordinationer -->
-                    <DataGrid ItemsSource="{Binding Recept.Ordinationer}" AutoGenerateColumns="False" CanUserAddRows="False" Height="300">
+                    <DataGrid x:Name="NyOrdinationerGrid" ItemsSource="{Binding Recept.Ordinationer}" AutoGenerateColumns="False" CanUserAddRows="False" Height="300">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Lægemiddel" Binding="{Binding Path=Lægemiddel, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                            <DataGridTextColumn Header="Dosis" Binding="{Binding Path=Dosis, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                            <DataGridTextColumn Header="Antal Udleveringer" Binding="{Binding Path=Udleveringer, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                            <DataGridTextColumn Header="Foretagne Udleveringer" Binding="{Binding Path=FortagneUdleveringer, Mode=TwoWay, ValidatesOnDataErrors=true, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
-                            <DataGridCheckBoxColumn Header="Lukket" Binding="{Binding Path=Lukket, Mode=TwoWay}" Width="100"/>
+
+                            <!-- Lægemiddel -->
+                            <DataGridTemplateColumn Header="Lægemiddel" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Lægemiddel}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Lægemiddel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- Dosis -->
+                            <DataGridTemplateColumn Header="Dosis" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Dosis}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Dosis, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- Antal Udleveringer -->
+                            <DataGridTemplateColumn Header="Antal Udleveringer" Width="150">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Udleveringer}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Udleveringer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
 
+
                     <!-- Knapper -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Nulstil" Width="120" Click="Nulstil_Click"/>
+                        <Button Content="Slet ordination" Width="120" Click="SletOrdination_Click"/>
                         <Button Content="Tilføj Ordination" Width="150" Click="TilfoejOrdination_Click"/>
                         <Button Content="Gem Recept" Width="120" Click="GemRecept_Click"/>
                     </StackPanel>
@@ -66,9 +106,10 @@
             </TabItem>
 
             <!-- Se Recepter Tab -->
-            <TabItem Header="Se Recepter">
+            <TabItem Header="Se Recepter" Height="20" VerticalAlignment="Top">
                 <StackPanel Margin="10">
                     <TextBlock Text="Eksisterende recepter" FontWeight="Bold" FontSize="16" Margin="0 0 0 10"/>
+                    <Button Content="Refresh" Width="120" Click="Refresh_Click"/>
 
                     <DataGrid ItemsSource="{Binding LægehusRecepter}"
                   AutoGenerateColumns="False"
@@ -77,10 +118,11 @@
                   Height="400">
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="80"/>
-                            <DataGridTextColumn Header="CPR" Binding="{Binding CprNummer}" Width="150"/>
-                            <DataGridTextColumn Header="Ydernummer" Binding="{Binding YderNummer}" Width="150"/>
-                            <DataGridTextColumn Header="Antal Ordinationer" Binding="{Binding Ordinationer.Count}" Width="150"/>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="*"/>
+                            <DataGridTextColumn Header="CPR" Binding="{Binding CprNummer}" Width="*"/>
+                            <DataGridTextColumn Header="Ydernummer" Binding="{Binding YderNummer}" Width="*"/>
+                            <DataGridTextColumn Header="Antal Ordinationer" Binding="{Binding Ordinationer.Count}" Width="*"/>
+                            <DataGridCheckBoxColumn Header="Lukket" Binding="{Binding Lukket}" Width="80"/>
                         </DataGrid.Columns>
 
                     </DataGrid>
@@ -120,7 +162,6 @@
                             <DataGridTextColumn Header="Dosis" Binding="{Binding Dosis}" Width="150"/>
                             <DataGridTextColumn Header="Antal Udleveringer" Binding="{Binding Udleveringer}" Width="150"/>
                             <DataGridTextColumn Header="Foretagne Udleveringer" Binding="{Binding FortagneUdleveringer}" Width="150"/>
-                            <DataGridCheckBoxColumn Header="Lukket" Binding="{Binding Lukket}" Width="100"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

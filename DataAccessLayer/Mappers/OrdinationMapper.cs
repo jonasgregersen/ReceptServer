@@ -12,7 +12,6 @@ public class OrdinationMapper
             Dosis = ordination.Dosis,
             Udleveringer = ordination.Udleveringer,
             FortagneUdleveringer = ordination.FortagneUdleveringer,
-            Lukket = ordination.Lukket,
             ReceptId = ordination.ReceptId
         };
     }
@@ -25,7 +24,6 @@ public class OrdinationMapper
             Dosis = ordination.Dosis,
             Udleveringer = ordination.Udleveringer,
             FortagneUdleveringer = ordination.FortagneUdleveringer,
-            Lukket = ordination.Lukket,
             ReceptId = ordination.ReceptId
         };
     }

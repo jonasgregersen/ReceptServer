@@ -1,5 +1,6 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
@@ -12,35 +13,25 @@ public class ReceptUdleveringRepository
         _context = context;
     }
     
-    public List<ReceptUdlevering> GetAll()
+    public async Task<List<ReceptUdlevering>> GetAll()
     {
-        return _context.ReceptUdleveringer.ToList();
+        return await _context.ReceptUdleveringer.ToListAsync();
     }
     
-    public ReceptUdlevering GetById(int id)
+    public async Task<ReceptUdlevering> GetById(int id)
     {
-        return _context.ReceptUdleveringer.Find(id);
+        return await _context.ReceptUdleveringer.FindAsync(id);
     }
     
-    public void Add(ReceptUdlevering receptUdlevering)
+    public async Task Add(ReceptUdlevering receptUdlevering)
     {
-        _context.ReceptUdleveringer.Add(receptUdlevering);
-        _context.SaveChanges();
+        await _context.ReceptUdleveringer.AddAsync(receptUdlevering);
+        await _context.SaveChangesAsync();
     }
     
-    public void Update(ReceptUdlevering receptUdlevering)
+    public async Task Update(ReceptUdlevering receptUdlevering)
     {
         _context.ReceptUdleveringer.Update(receptUdlevering);
-        _context.SaveChanges();
-    }
-    
-    public void Delete(int id)
-    {
-        var receptUdlevering = _context.ReceptUdleveringer.Find(id);
-        if (receptUdlevering != null)
-        {
-            _context.ReceptUdleveringer.Remove(receptUdlevering);
-            _context.SaveChanges();
-        }
+        await _context.SaveChangesAsync();
     }
 }

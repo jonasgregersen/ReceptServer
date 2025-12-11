@@ -22,7 +22,6 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddScoped<ApotekService>();
 builder.Services.AddScoped<ReceptService>();
-builder.Services.AddScoped<ReceptUdleveringService>();
 
 builder.Services.AddScoped<ApotekRepository>();
 builder.Services.AddScoped<ReceptRepository>();

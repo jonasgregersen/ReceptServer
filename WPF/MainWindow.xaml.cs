@@ -3,6 +3,7 @@ using WPF.ViewModels;
 using WPF.Models;
 using WPF.Services;
 using Microsoft.IdentityModel.Tokens;
+using System.Windows.Controls;
 
 namespace WPF
 {
@@ -55,6 +56,28 @@ namespace WPF
             }
 
             return false;
+        }
+
+        private void SletOrdination_Click(object sender, RoutedEventArgs e)
+        {
+            if (NyOrdinationerGrid.SelectedItem is Ordination selectedOrdination)
+            {
+                _receptViewModel.SletOrdination(selectedOrdination);
+            }
+            else
+            {
+                MessageBox.Show("Vælg venligst en ordination at slette.", "Ingen Valg", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void Nulstil_Click(object sender, RoutedEventArgs e)
+        {
+            _receptViewModel.InitRecept();
+        }
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            _receptViewModel.HentLægehusRecepter();
         }
 
         private async void SøgRecept_Click(object sender, RoutedEventArgs e)

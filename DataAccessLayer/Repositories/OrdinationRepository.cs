@@ -1,5 +1,6 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
@@ -12,35 +13,25 @@ public class OrdinationRepository
         _context = context;
     }
     
-    public List<Ordination> GetAll()
+    public async Task<List<Ordination>> GetAll()
     {
-        return _context.Ordinationer.ToList();
+        return await _context.Ordinationer.ToListAsync();
     }
     
-    public Ordination GetById(int id)
+    public async Task<Ordination> GetById(int id)
     {
-        return _context.Ordinationer.Find(id);
+        return await _context.Ordinationer.FindAsync(id);
     }
     
-    public void Add(Ordination ordination)
+    public async Task Add(Ordination ordination)
     {
-        _context.Ordinationer.Add(ordination);
-        _context.SaveChanges();
+        await _context.Ordinationer.AddAsync(ordination);
+        await _context.SaveChangesAsync();
     }
     
-    public void Update(Ordination ordination)
+    public async Task Update(Ordination ordination)
     {
         _context.Ordinationer.Update(ordination);
-        _context.SaveChanges();
-    }
-    
-    public void Delete(int id)
-    {
-        var ordination = _context.Ordinationer.Find(id);
-        if (ordination != null)
-        {
-            _context.Ordinationer.Remove(ordination);
-            _context.SaveChanges();
-        }
+        await _context.SaveChangesAsync();
     }
 }

@@ -1,5 +1,6 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
@@ -12,36 +13,26 @@ public class ApotekRepository
         _context = context;
     }
     
-    public List<Apotek> GetAll()
+    public async Task<List<Apotek>> GetAll()
     {
-        return _context.Apoteker.ToList();
+        return await _context.Apoteker.ToListAsync();
     }
     
-    public Apotek GetById(int id)
+    public async Task<Apotek> GetById(int id)
     {
-        return _context.Apoteker.Find(id);
+        return await _context.Apoteker.FindAsync(id);
     }
     
-    public void Add(Apotek apotek)
+    public async Task Add(Apotek apotek)
     {
-        _context.Apoteker.Add(apotek);
-        _context.SaveChanges();
+        await _context.Apoteker.AddAsync(apotek);
+        await _context.SaveChangesAsync();
     }
     
-    public void Update(Apotek apotek)
+    public async Task Update(Apotek apotek)
     {
         _context.Apoteker.Update(apotek);
-        _context.SaveChanges();
-    }
-    
-    public void Delete(int id)
-    {
-        var apotek = _context.Apoteker.Find(id);
-        if (apotek != null)
-        {
-            _context.Apoteker.Remove(apotek);
-            _context.SaveChanges();
-        }
+        await _context.SaveChangesAsync();
     }
     
 }

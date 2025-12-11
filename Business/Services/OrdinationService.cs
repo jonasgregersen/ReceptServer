@@ -12,30 +12,26 @@ public class OrdinationService
         _ordinationRepository = ordinationRepository;
     }
 
-    public List<DTOOrdination> GetAll()
+    public async Task<List<DTOOrdination>> GetAll()
     {
-        return _ordinationRepository.GetAll().Select(o => OrdinationMapper.Map(o)).ToList();
+        var ordinationer = await _ordinationRepository.GetAll();
+        return ordinationer.Select(o => OrdinationMapper.Map(o)).ToList();
     }
 
-    public DTOOrdination GetById(int id)
+    public async Task<DTOOrdination> GetById(int id)
     {
-        return OrdinationMapper.Map(_ordinationRepository.GetById(id));
+        return OrdinationMapper.Map(await _ordinationRepository.GetById(id));
     }
 
-    public void Add(DTOOrdination ordination)
+    public async Task Add(DTOOrdination ordination)
     {
         var DALOrdination = OrdinationMapper.Map(ordination);
-        _ordinationRepository.Add(DALOrdination);
+        await _ordinationRepository.Add(DALOrdination);
     }
 
-    public void Update(DTOOrdination ordination)
+    public async Task Update(DTOOrdination ordination)
     {
         var DALOrdination = OrdinationMapper.Map(ordination);
-        _ordinationRepository.Update(DALOrdination);
-    }
-
-    public void Delete(int id)
-    {
-        _ordinationRepository.Delete(id);
+        await _ordinationRepository.Update(DALOrdination);
     }
 }

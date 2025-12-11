@@ -63,25 +63,10 @@ namespace WPF.Models
                 {
                     _fortagneUdleveringer = value;
                     OnPropertyChanged(nameof(FortagneUdleveringer));
-
-                    if (_fortagneUdleveringer >= Udleveringer)
-                        Lukket = true;
                 }
             }
         }
 
-        private bool _lukket = false;
-        public bool Lukket {
-            get => _lukket;
-            set
-            {
-                if (_lukket != value)
-                {
-                    _lukket = value;
-                    OnPropertyChanged(nameof(Lukket));
-                }
-            }
-        }
         public int ReceptId { get; set; }
 
         public string Error => null;

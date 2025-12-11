@@ -13,56 +13,46 @@ public class ReceptRepository
         _context = context;
     }
     
-    public List<Recept> GetByCpr(string cprNummer)
+    public async Task<List<Recept>> GetByCpr(string cprNummer)
     {
-        return _context.Recepter
+        return await _context.Recepter
             .Include(r => r.Ordinationer)
-            .Where(r => r.CprNummer == cprNummer).ToList();
+            .Where(r => r.CprNummer == cprNummer).ToListAsync();
     }
-    public List<Recept> GetAll()
+    public async Task<List<Recept>> GetAll()
     {
-        return _context.Recepter
+        return await _context.Recepter
             .Include(r => r.Ordinationer)
-            .ToList();
+            .ToListAsync();
     }
 
-    public List<Recept> GetByLaegehusId(int id)
+    public async Task<List<Recept>> GetByLaegehusId(int id)
     {
-        return _context.Recepter
+        return await _context.Recepter
             .Include(r => r.Ordinationer)
             .Where(r => r.LægehusId == id)
-            .ToList();
+            .ToListAsync();
     }
 
-    public Recept? GetById(int id)
+    public async Task<Recept?> GetById(int id)
     {
-        return _context.Recepter
+        return await _context.Recepter
             .Include(r => r.Ordinationer)
-            .FirstOrDefault(r => r.Id == id);
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
-    public void Add(Recept recept)
+    public async Task Add(Recept recept)
     {
-        _context.Recepter.Add(recept);
-        _context.SaveChanges();
+        await _context.Recepter.AddAsync(recept);
+        await _context.SaveChangesAsync();
     }
 
-    public void Update(Recept recept)
+    public async Task Update(Recept recept)
     {
         if (recept != null)
         {
             _context.Recepter.Update(recept);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     
-    }
-    
-    public void Delete(int id)
-    {
-        var recept = _context.Recepter.Find(id);
-        if (recept != null)
-        {
-            _context.Recepter.Remove(recept);
-            _context.SaveChanges();
-        }
     }
 }

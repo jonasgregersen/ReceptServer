@@ -14,6 +14,7 @@ namespace WPF.Models
         public string CprNummer { get; set; }
         public DateTime OprettelsesDato { get; set; }
         public int LægehusId { get; set; }
+        public bool Lukket { get; set; }
         public ObservableCollection<Ordination> Ordinationer { get; set; }
     }
 }
