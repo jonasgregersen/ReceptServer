@@ -1,6 +1,6 @@
 namespace DataAccessLayer.Mappers;
 using DTOOrdination = DataTransferLayer.Models.Ordination;
-using DALOrdination = DataAccessLayer.Models.Ordination;
+using DALOrdination = Models.Ordination;
 public class OrdinationMapper
 {
     public static DALOrdination Map(DTOOrdination ordination)

@@ -3,7 +3,7 @@ using DataAccessLayer.Repositories;
 using DataTransferLayer.Models;
 using DTOApotek = DataTransferLayer.Models.Apotek;
 
-namespace Business.Models;
+namespace Business.Services;
 
 public class ApotekService
 {
@@ -12,15 +12,13 @@ public class ApotekService
     private readonly OrdinationRepository _ordinationRepository;
     private readonly ReceptUdleveringRepository _receptUdleveringRepository;
 
-    private readonly ReceptService _receptService;
     
-    public ApotekService(ApotekRepository apotekRepository, ReceptUdleveringRepository receptUdleveringRepository, ReceptService receptService, ReceptRepository receptRepository, OrdinationRepository ordinationRepository)
+    public ApotekService(ApotekRepository apotekRepository, ReceptUdleveringRepository receptUdleveringRepository, ReceptRepository receptRepository, OrdinationRepository ordinationRepository)
     { 
         _apotekRepository = apotekRepository;
         _receptUdleveringRepository = receptUdleveringRepository;
         _receptRepository = receptRepository;
         _ordinationRepository = ordinationRepository;
-        _receptService = receptService;
     }
     
     public async Task<List<DTOApotek>> GetAll()

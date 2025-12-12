@@ -1,16 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Context;
-using Business.Models;
+using Business.Services;
 using DataAccessLayer.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options =>
-{
-    options.UseSqlServer("Server=localhost,1433;Database=ReceptServer;User Id=sa;Password=reallyStrongPwd123;TrustServerCertificate=True");
-});
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -31,15 +28,18 @@ builder.Services.AddScoped<OrdinationRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+using (var scope = app.Services.CreateScope())
 
+{
+    var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    db.Database.Migrate();
+}
 
 app.UseHttpsRedirection();
 app.UseRouting();

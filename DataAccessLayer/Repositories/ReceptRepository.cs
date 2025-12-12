@@ -6,7 +6,7 @@ namespace DataAccessLayer.Repositories;
 
 public class ReceptRepository
 {
-    private DatabaseContext _context;
+    private readonly DatabaseContext _context;
     
     public ReceptRepository(DatabaseContext context)
     {

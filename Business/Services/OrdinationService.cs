@@ -1,11 +1,11 @@
 using DataAccessLayer.Mappers;
 using DataAccessLayer.Repositories;
 using DTOOrdination = DataTransferLayer.Models.Ordination;
-namespace Business.Models;
+namespace Business.Services;
 
 public class OrdinationService
 {
-    private OrdinationRepository _ordinationRepository;
+    private readonly OrdinationRepository _ordinationRepository;
     
     public OrdinationService(OrdinationRepository ordinationRepository)
     {

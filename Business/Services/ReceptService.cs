@@ -2,11 +2,11 @@ using DataAccessLayer.Mappers;
 using DataAccessLayer.Repositories;
 using DTORecept = DataTransferLayer.Models.Recept;
 
-namespace Business.Models;
+namespace Business.Services;
 
 public class ReceptService
 {
-    private ReceptRepository _receptRepository;
+    private readonly ReceptRepository _receptRepository;
 
     public ReceptService(ReceptRepository receptRepository)
     {

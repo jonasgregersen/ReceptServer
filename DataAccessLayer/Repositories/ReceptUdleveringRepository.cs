@@ -6,7 +6,7 @@ namespace DataAccessLayer.Repositories;
 
 public class ReceptUdleveringRepository
 {
-    private DatabaseContext _context;
+    private readonly DatabaseContext _context;
     
     public ReceptUdleveringRepository(DatabaseContext context)
     {

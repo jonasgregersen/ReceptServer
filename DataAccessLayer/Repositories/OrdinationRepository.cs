@@ -6,7 +6,7 @@ namespace DataAccessLayer.Repositories;
 
 public class OrdinationRepository
 {
-    private DatabaseContext _context;
+    private readonly DatabaseContext _context;
     
     public OrdinationRepository(DatabaseContext context)
     {

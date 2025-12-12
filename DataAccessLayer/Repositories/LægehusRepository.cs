@@ -6,7 +6,7 @@ namespace DataAccessLayer.Repositories;
 
 public class LægehusRepository
 {
-    private DatabaseContext _context;
+    private readonly DatabaseContext _context;
     
     public LægehusRepository(DatabaseContext context)
     {

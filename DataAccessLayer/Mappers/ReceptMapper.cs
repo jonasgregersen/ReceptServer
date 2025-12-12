@@ -1,9 +1,6 @@
 namespace DataAccessLayer.Mappers;
 using DTORecept = DataTransferLayer.Models.Recept;
 using DALRecept = Models.Recept;
-using DTOOrdination = DataTransferLayer.Models.Ordination;
-using DALOrdination = Models.Ordination;
-using System.Collections.ObjectModel;
 public class ReceptMapper
 {
     public static DALRecept Map(DTORecept recept)

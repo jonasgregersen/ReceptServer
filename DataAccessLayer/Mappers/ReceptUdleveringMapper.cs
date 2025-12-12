@@ -1,6 +1,6 @@
 namespace DataAccessLayer.Mappers;
 using DTOReceptUdlevering = DataTransferLayer.Models.ReceptUdlevering;
-using DALReceptUdlevering = DataAccessLayer.Models.ReceptUdlevering;
+using DALReceptUdlevering = Models.ReceptUdlevering;
 
 public class ReceptUdleveringMapper
 {

@@ -1,9 +1,6 @@
-﻿using Business.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Business.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
-using Recept = DataTransferLayer.Models.Recept;
 
 namespace ReceptServer.Controllers
 {
@@ -17,13 +14,14 @@ namespace ReceptServer.Controllers
             _apotekBLL = apotekBLL;
             _receptBLL = receptBLL;
         }
-        // GET: ApotekController
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
             var apoteker = await _apotekBLL.GetAll();
             return View(apoteker);
         }
 
+        [HttpGet]
         [Route("apotek/{id:int}")]
         public async Task<ActionResult> Index(int id)
         {

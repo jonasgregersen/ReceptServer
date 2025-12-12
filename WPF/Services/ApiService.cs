@@ -1,11 +1,7 @@
 ﻿using WPF.Models;
-using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using System.Windows;
-
 
 namespace WPF.Services
 {

@@ -41,6 +41,26 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Apoteker");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Adresse = "Sct. Clemens Torv 4, 8000 Aarhus C",
+                            Navn = "Sct. Clement Apotek"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Adresse = "Østergade 15, 7800 Skive",
+                            Navn = "Skive Apotek"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Adresse = "Nørregade 20, 7500 Holstebro",
+                            Navn = "Holstebro Løve Apotek"
+                        });
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Lægehus", b =>
@@ -62,6 +82,26 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lægehus");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Navn = "Skive Lægehus",
+                            YderNummer = "123456"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Navn = "Aarhus Sundhedscenter",
+                            YderNummer = "654321"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Navn = "Viborg Lægeklinik",
+                            YderNummer = "112233"
+                        });
                 });
 
             modelBuilder.Entity("DataAccessLayer.Models.Ordination", b =>

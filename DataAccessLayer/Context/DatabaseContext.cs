@@ -17,16 +17,16 @@ public class DatabaseContext: DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-    }
-    public DatabaseContext() { }
+        modelBuilder.Entity<Lægehus>().HasData(
+            new Lægehus { Id = 1, Navn = "Skive Lægehus", YderNummer = "123456" },
+            new Lægehus { Id = 2, Navn = "Aarhus Sundhedscenter", YderNummer = "654321" },
+            new Lægehus { Id = 3, Navn = "Viborg Lægeklinik", YderNummer = "112233" }
+        );
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("Server=localhost,1433;Database=ReceptServer;User Id=sa;Password=reallyStrongPwd123;TrustServerCertificate=True");
-        }
+        modelBuilder.Entity<Apotek>().HasData(
+            new Apotek {Id = 1, Navn = "Sct. Clement Apotek", Adresse = "Sct. Clemens Torv 4, 8000 Aarhus C" },
+            new Apotek {Id = 2, Navn = "Skive Apotek", Adresse = "Østergade 15, 7800 Skive" },
+            new Apotek {Id = 3, Navn = "Holstebro Løve Apotek", Adresse = "Nørregade 20, 7500 Holstebro" }
+        );
     }
-
 }

@@ -1,9 +1,8 @@
 using DataAccessLayer.Mappers;
 using DataAccessLayer.Repositories;
-using DataTransferLayer.Models;
 using DTOLægehus = DataTransferLayer.Models.Lægehus;
 
-namespace Business.Models;
+namespace Business.Services;
 
 public class LægehusService
 {

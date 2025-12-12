@@ -1,6 +1,6 @@
 namespace DataAccessLayer.Mappers;
 
-using DALApotek = DataAccessLayer.Models.Apotek;
+using DALApotek = Models.Apotek;
 using DTOApotek = DataTransferLayer.Models.Apotek;
 
 public class ApotekMapper
