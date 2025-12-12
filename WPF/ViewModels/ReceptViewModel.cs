@@ -4,12 +4,13 @@ using System.Windows;
 using WPF.Services;
 using System.Collections.ObjectModel;
 using Microsoft.IdentityModel.Tokens;
+using WPF.Interfaces;
 
 namespace WPF.ViewModels
 {
     public class ReceptViewModel: INotifyPropertyChanged
     {
-        private readonly ApiService _apiService;
+        private readonly IApiService _apiService;
         private readonly AppState _appState = AppState.Instance;
         private Recept _recept;
         private Recept _fundetRecept;
@@ -43,7 +44,7 @@ namespace WPF.ViewModels
             }
         }
 
-        public ReceptViewModel(ApiService apiService)
+        public ReceptViewModel(IApiService apiService)
         {
             _apiService = apiService;
             InitRecept();

@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF.Interfaces;
 
 namespace WPF.Views
 {
     public partial class LaegehusLoginWindow : Window
     {
-        private readonly WPF.ViewModels.LoginViewModel _viewModel = new WPF.ViewModels.LoginViewModel();
-        public LaegehusLoginWindow()
+        private readonly ViewModels.LoginViewModel _viewModel;
+        public LaegehusLoginWindow(IApiService apiService)
         {
             InitializeComponent();
+
+            _viewModel = new ViewModels.LoginViewModel(apiService);
         }
 
         private async void Login_Click(object sender, RoutedEventArgs e)

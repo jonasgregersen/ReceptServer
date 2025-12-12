@@ -1,10 +1,11 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.Repositories;
 
-public class ApotekRepository
+public class ApotekRepository : IApotekRepository
 {
     private readonly DatabaseContext _context;
     

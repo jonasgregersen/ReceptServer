@@ -1,4 +1,4 @@
-using Business.Services;
+using Business.Interfaces;
 using DataTransferLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace ReceptServerAPI.Controllers;
 [Route("api/[controller]")]
 public class LægehusController : ControllerBase
 {
-    private readonly LægehusService _lægehusService;
+    private readonly ILægehusService _lægehusService;
 
-    public LægehusController(LægehusService lægehusService)
+    public LægehusController(ILægehusService lægehusService)
     {
         _lægehusService = lægehusService;
     }

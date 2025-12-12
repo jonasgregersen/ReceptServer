@@ -1,13 +1,14 @@
+using Business.Interfaces;
 using DataAccessLayer.Mappers;
-using DataAccessLayer.Repositories;
 using DTOOrdination = DataTransferLayer.Models.Ordination;
 namespace Business.Services;
+using DataAccessLayer.Interfaces;
 
-public class OrdinationService
+public class OrdinationService : IOrdinationService
 {
-    private readonly OrdinationRepository _ordinationRepository;
+    private readonly IOrdinationRepository _ordinationRepository;
     
-    public OrdinationService(OrdinationRepository ordinationRepository)
+    public OrdinationService(IOrdinationRepository ordinationRepository)
     {
         _ordinationRepository = ordinationRepository;
     }

@@ -1,14 +1,15 @@
+using Business.Interfaces;
 using DataAccessLayer.Mappers;
-using DataAccessLayer.Repositories;
 using DTOLægehus = DataTransferLayer.Models.Lægehus;
+using DataAccessLayer.Interfaces;
 
 namespace Business.Services;
 
-public class LægehusService
+public class LægehusService : ILægehusService
 {
-    private readonly LægehusRepository _lægehusRepository;
+    private readonly ILægehusRepository _lægehusRepository;
     
-    public LægehusService(LægehusRepository lægehusRepository)
+    public LægehusService(ILægehusRepository lægehusRepository)
     {
         _lægehusRepository = lægehusRepository;
     }

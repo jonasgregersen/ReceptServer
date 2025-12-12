@@ -1,15 +1,15 @@
-﻿using Business.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Business.Interfaces;
 
 namespace ReceptServer.Controllers
 {
     public class ApotekController : Controller
     {
-        private readonly ApotekService _apotekBLL;
-        private readonly ReceptService _receptBLL;
+        private readonly IApotekService _apotekBLL;
+        private readonly IReceptService _receptBLL;
 
-        public ApotekController(ApotekService apotekBLL, ReceptService receptBLL)
+        public ApotekController(IApotekService apotekBLL, IReceptService receptBLL)
         {
             _apotekBLL = apotekBLL;
             _receptBLL = receptBLL;

@@ -1,19 +1,21 @@
 using DataAccessLayer.Mappers;
-using DataAccessLayer.Repositories;
+using DataAccessLayer.Interfaces;
 using DataTransferLayer.Models;
 using DTOApotek = DataTransferLayer.Models.Apotek;
+using Business.Interfaces;
+using Business.Utils;
 
 namespace Business.Services;
 
-public class ApotekService
+public class ApotekService : IApotekService
 {
-    private readonly ApotekRepository _apotekRepository;
-    private readonly ReceptRepository _receptRepository;
-    private readonly OrdinationRepository _ordinationRepository;
-    private readonly ReceptUdleveringRepository _receptUdleveringRepository;
+    private readonly IApotekRepository _apotekRepository;
+    private readonly IReceptRepository _receptRepository;
+    private readonly IOrdinationRepository _ordinationRepository;
+    private readonly IReceptUdleveringRepository _receptUdleveringRepository;
 
     
-    public ApotekService(ApotekRepository apotekRepository, ReceptUdleveringRepository receptUdleveringRepository, ReceptRepository receptRepository, OrdinationRepository ordinationRepository)
+    public ApotekService(IApotekRepository apotekRepository, IReceptUdleveringRepository receptUdleveringRepository, IReceptRepository receptRepository, IOrdinationRepository ordinationRepository)
     { 
         _apotekRepository = apotekRepository;
         _receptUdleveringRepository = receptUdleveringRepository;
@@ -67,7 +69,7 @@ public class ApotekService
             await _ordinationRepository.Update(ordination);
 
             var DTORecept = ReceptMapper.Map(recept);
-            if (ReceptService.AlleOrdinationerUdleveret(DTORecept))
+            if (ReceptUtils.AlleOrdinationerUdleveret(DTORecept))
             {
                 recept.Lukket = true;
                 await _receptRepository.Update(recept);

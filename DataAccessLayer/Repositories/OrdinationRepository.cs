@@ -1,10 +1,11 @@
 using DataAccessLayer.Context;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories;
 
-public class OrdinationRepository
+public class OrdinationRepository : IOrdinationRepository
 {
     private readonly DatabaseContext _context;
     

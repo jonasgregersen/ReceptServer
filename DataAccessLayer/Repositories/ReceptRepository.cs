@@ -1,10 +1,11 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.Repositories;
 
-public class ReceptRepository
+public class ReceptRepository : IReceptRepository
 {
     private readonly DatabaseContext _context;
     
@@ -26,7 +27,7 @@ public class ReceptRepository
             .ToListAsync();
     }
 
-    public async Task<List<Recept>> GetByLaegehusId(int id)
+    public async Task<List<Recept>> GetByLægehusId(int id)
     {
         return await _context.Recepter
             .Include(r => r.Ordinationer)

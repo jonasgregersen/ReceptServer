@@ -2,10 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Json;
+using WPF.Interfaces;
 
 namespace WPF.Services
 {
-    public class ApiService
+    public class ApiService : IApiService
     {
         private readonly HttpClient client;
 

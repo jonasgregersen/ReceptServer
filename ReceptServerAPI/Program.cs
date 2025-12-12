@@ -1,6 +1,8 @@
 using Business.Services;
+using Business.Interfaces;
 using DataAccessLayer.Context;
 using DataAccessLayer.Repositories;
+using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,11 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseConnection")));
 
-builder.Services.AddScoped<LægehusRepository>();
-builder.Services.AddScoped<ReceptRepository>();
+builder.Services.AddScoped<ILægehusRepository, LægehusRepository>();
+builder.Services.AddScoped<IReceptRepository, ReceptRepository>();
 
-builder.Services.AddScoped<LægehusService>();
-builder.Services.AddScoped<ReceptService>();
+builder.Services.AddScoped<ILægehusService, LægehusService>();
+builder.Services.AddScoped<IReceptService, ReceptService>();
 
 var app = builder.Build();
 

@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Context;
 using Business.Services;
+using Business.Interfaces;
 using DataAccessLayer.Repositories;
+using DataAccessLayer.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +19,13 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddScoped<ApotekService>();
-builder.Services.AddScoped<ReceptService>();
+builder.Services.AddScoped<IApotekService, ApotekService>();
+builder.Services.AddScoped<IReceptService, ReceptService>();
 
-builder.Services.AddScoped<ApotekRepository>();
-builder.Services.AddScoped<ReceptRepository>();
-builder.Services.AddScoped<ReceptUdleveringRepository>();
-builder.Services.AddScoped<OrdinationRepository>();
+builder.Services.AddScoped<IApotekRepository, ApotekRepository>();
+builder.Services.AddScoped<IReceptRepository, ReceptRepository>();
+builder.Services.AddScoped<IReceptUdleveringRepository, ReceptUdleveringRepository>();
+builder.Services.AddScoped<IOrdinationRepository, OrdinationRepository>();
 
 
 var app = builder.Build();

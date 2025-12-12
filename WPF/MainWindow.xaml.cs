@@ -4,6 +4,7 @@ using WPF.Models;
 using WPF.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Windows.Controls;
+using WPF.Interfaces;
 
 namespace WPF
 {
@@ -12,13 +13,12 @@ namespace WPF
         private readonly ReceptViewModel _receptViewModel;
         private readonly LoginViewModel _loginViewModel;
 
-        public MainWindow()
+        public MainWindow(IApiService apiService)
         {
             InitializeComponent();
 
-            // Opret ViewModel og sæt DataContext
-            _receptViewModel = new ReceptViewModel(new ApiService());
-            _loginViewModel = new LoginViewModel();
+            _receptViewModel = new ReceptViewModel(apiService);
+            _loginViewModel = new LoginViewModel(apiService);
             DataContext = _receptViewModel;
 
             Loaded += async (_, __) => await _receptViewModel.HentLægehusRecepter();

@@ -1,4 +1,4 @@
-using Business.Services;
+using Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using DTORecept = DataTransferLayer.Models.Recept;
 
@@ -8,9 +8,9 @@ namespace ReceptServerAPI.Controllers;
 [Route("api/[controller]")]
 public class ReceptController: ControllerBase
 {
-    private readonly ReceptService _receptService;
+    private readonly IReceptService _receptService;
     
-    public ReceptController(ReceptService receptService)
+    public ReceptController(IReceptService receptService)
     {
         _receptService = receptService;
     }
@@ -34,9 +34,9 @@ public class ReceptController: ControllerBase
     }
 
     [HttpGet("lægehus/{lægehusId}")] 
-    public async Task<ActionResult<List<DTORecept>>> GetReceptByLægehus(int lægehusId)
+    public async Task<ActionResult<List<DTORecept>>> GetByLægehusId(int lægehusId)
     {
-        var result = await _receptService.GetLægehusRecepter(lægehusId);
+        var result = await _receptService.GetByLægehusId(lægehusId);
         return Ok(result);      
     }
     

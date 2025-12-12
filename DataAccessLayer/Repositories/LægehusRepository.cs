@@ -1,10 +1,11 @@
 using DataAccessLayer.Context;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.Interfaces;
 
 namespace DataAccessLayer.Repositories;
 
-public class LægehusRepository
+public class LægehusRepository : ILægehusRepository
 {
     private readonly DatabaseContext _context;
     
