@@ -96,7 +96,7 @@ namespace WPF
             }
             else
             {
-                MessageBox.Show("Indtast venligst et gyldigt Recept ID.", "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Indtast venligst et gyldigt Recept ID.", "Ugyldigt ID", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
         private async void LogOut_Click(object sender, RoutedEventArgs e)

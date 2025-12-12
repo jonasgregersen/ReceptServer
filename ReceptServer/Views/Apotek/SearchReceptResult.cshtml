@@ -41,8 +41,8 @@
 
                                 <div class="ordination-actions">
                                     <input type="number" name="antal" placeholder="Antal" min="1" @(ord.FortagneUdleveringer == ord.Udleveringer ? "disabled" : "") />
-                                    <input type="hidden" name="receptId" value="@recept.Id" />
-                                    <input type="hidden" name="ordinationId" value="@ord.Id" />
+                                    @Html.Hidden("receptId", recept.Id)
+                                    @Html.Hidden("ordinationId", ord.Id)
                                     <button type="submit" @(ord.FortagneUdleveringer == ord.Udleveringer ? "disabled" : "")>Udlevér</button>
                                 </div>
                             }

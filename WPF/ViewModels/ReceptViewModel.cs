@@ -88,17 +88,17 @@ namespace WPF.ViewModels
         {
             if (Recept == null)
             {
-                MessageBox.Show("Ingen recept at gemme.");
+                MessageBox.Show("Ingen recept at gemme.", "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (cprNummer.IsNullOrEmpty())
             {
-                MessageBox.Show("Indtast et CPR nummer.");
+                MessageBox.Show("Indtast et CPR nummer.", "Advarsel", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (Recept.Ordinationer.IsNullOrEmpty())
             {
-                MessageBox.Show("Tilføj ordination til recept.");
+                MessageBox.Show("Tilføj ordination til recept.", "Advarsel", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -110,7 +110,7 @@ namespace WPF.ViewModels
                 bool success = await _apiService.OpretRecept(Recept);
                 if (success)
                 {
-                    MessageBox.Show("Recept gemt!");
+                    MessageBox.Show("Recept gemt!", "Succes", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace WPF.ViewModels
         {
             if (id <= 0)
             {
-                MessageBox.Show("Indtast et gyldigt recept ID.");
+                MessageBox.Show("Indtast venligst et gyldigt recept ID.", "Ugyldigt ID", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
             try
@@ -136,7 +136,7 @@ namespace WPF.ViewModels
                 FundetRecept = await _apiService.GetReceptById(id);
                 if (FundetRecept == null)
                 {
-                    MessageBox.Show("Ingen recept fundet med dette ID.");
+                    MessageBox.Show("Ingen recept fundet med dette ID.", "Recept ikke fundet", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return false;
                 }
             }
@@ -167,10 +167,5 @@ namespace WPF.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-    }
-
-    public class ReceptViewModelDesign
-    {
-        // Add properties and logic as needed for design-time support
     }
 }

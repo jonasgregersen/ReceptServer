@@ -29,3 +29,87 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.apotek-details {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+    .apotek-details h2 {
+        margin-top: 0;
+        color: #333;
+    }
+
+.detail-row {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 14px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn-link {
+    margin-left: 10px;
+}
+
+.recept-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recept-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.recept-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recept-info p {
+    margin: 2px 0;
+}
+
+.ordination-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ordination-card {
+    border: 1px dashed #aaa;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ordination-info p {
+    margin: 2px 0;
+}
+
+.ordination-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
