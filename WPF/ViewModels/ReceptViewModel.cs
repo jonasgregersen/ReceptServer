@@ -118,7 +118,6 @@ namespace WPF.ViewModels
                 MessageBox.Show("Fejl ved oprettelse af recept: " + ex.Message, "Fejl", MessageBoxButton.OK, MessageBoxImage.Error);
             } finally
             {
-                // Reset recept after saving
                 InitRecept();
                 await HentLægehusRecepter();
             }

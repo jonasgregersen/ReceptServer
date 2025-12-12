@@ -1,9 +1,6 @@
 ﻿using System.Windows;
 using WPF.ViewModels;
 using WPF.Models;
-using WPF.Services;
-using Microsoft.IdentityModel.Tokens;
-using System.Windows.Controls;
 using WPF.Interfaces;
 
 namespace WPF

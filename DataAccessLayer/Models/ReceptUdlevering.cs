@@ -1,5 +1,3 @@
-using Microsoft.Identity.Client.Extensibility;
-
 namespace DataAccessLayer.Models;
 
 public class ReceptUdlevering

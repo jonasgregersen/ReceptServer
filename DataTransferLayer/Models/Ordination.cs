@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace DataTransferLayer.Models;
 
 public class Ordination

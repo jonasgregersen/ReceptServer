@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface ILægehusRepository
     {
-        Task<List<Models.Lægehus>> GetAll();
-        Task<Models.Lægehus> GetById(int id);
-        Task<Models.Lægehus> GetByYdernummer(string ydernummer);
-        Task Add(Models.Lægehus lægehus);
-        Task Update(Models.Lægehus lægehus);
+        Task<List<Lægehus>> GetAll();
+        Task<Lægehus> GetById(int id);
+        Task<Lægehus> GetByYdernummer(string ydernummer);
+        Task Add(Lægehus lægehus);
+        Task Update(Lægehus lægehus);
         Task Delete(int id);
     }
 }

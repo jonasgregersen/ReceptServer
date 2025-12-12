@@ -71,7 +71,7 @@ namespace WPF.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return true; // Gem lykkedes
+                    return true; 
                 }
                 else
                 {
